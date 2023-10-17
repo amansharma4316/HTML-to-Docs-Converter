@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML to DOCX Converter</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        #htmlFileInput {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        
+        #convertButton {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #convertButton:hover {
+            background-color: #2185d0;
+        }
+        
+        #downloadLink {
+            display: none;
+            background-color: #27ae60;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px;
+        }
+        
+        #htmlContent {
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>HTML to DOCX Converter</h1>
+    <input type="file" id="htmlFileInput" accept=".html">
+    <button id="convertButton">Convert to DOCX</button>
+    <textarea id="htmlContent" style="display: none; width: 800%; height: 200px; padding: 10px; font-family: monospace; "></textarea>
+
+    <a id="downloadLink" style="display: none;">Download DOCX</a>
+
+    <script>
+        document.getElementById('convertButton').addEventListener('click', function() {
+            const htmlFileInput = document.getElementById('htmlFileInput');
+            const downloadLink = document.getElementById('downloadLink');
+            const htmlContentDiv = document.getElementById('htmlContent');
+
+            const file = htmlFileInput.files[0];
+
+            if (!file) {
+                alert('Please select an HTML file to convert.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const htmlContent = e.target.result;
+
+                // Function to strip HTML tags and leave plain text
+                function stripHtml(html) {
+                    const tmp = document.createElement('div');
+                    tmp.innerHTML = html;
+                    return tmp.textContent || tmp.innerText || '';
+                }
+
+                // Convert the HTML content to plain text
+                const plainText = stripHtml(htmlContent);
+
+                // Create a download link for the plain text file
+                const blob = new Blob([plainText], {
+                    type: 'text/plain'
+                });
+                const url = window.URL.createObjectURL(blob);
+                downloadLink.href = url;
+                downloadLink.download = 'output.doc'; // You can change the filename if needed
+                downloadLink.style.display = 'block';
+
+                // Display the HTML content in a textarea
+                htmlContentDiv.innerHTML = plainText;
+                htmlContentDiv.style.display = 'block';
+            };
+
+            reader.readAsText(file);
+        });
+    </script>
+
+
+</body>
+
+</html>
