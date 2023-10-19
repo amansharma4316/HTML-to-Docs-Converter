@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    background-color: #3498db;
+    color: #fff;
+    padding: 20px;
+}
+
+#htmlFileInput {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    background-color: #fff;
+    width: 80%;
+    /* Adjust the width as needed */
+    max-width: 400px;
+    /* Set a max-width if needed */
+}
+
+#convertButton {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#convertButton:hover {
+    background-color: #2185d0;
+}
+
+#downloadLink {
+    display: none;
+    background-color: #27ae60;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+#htmlContent {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px;
+    width: 80%;
+    /* Adjust the width as needed */
+    max-width: 800px;
+    /* Set a max-width if needed */
+}
+
+@media (max-width: 768px) {
+    #htmlFileInput,
+    #htmlContent {
+        width: 95%;
+    }
+}
